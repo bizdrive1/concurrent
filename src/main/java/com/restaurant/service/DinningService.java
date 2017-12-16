@@ -1,6 +1,8 @@
 package com.restaurant.service;
 
 import java.lang.Thread.State;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 
 import com.restaurant.dinning.Dinner;
@@ -10,17 +12,19 @@ import com.restaurant.dinning.RightDinner;
 
 public class DinningService {
 
+	public static final int TOTAL_DINNER = 5;
 	private long timeInSeconds;
+	private Dinner[] dinners;
 	
 	public DinningService(long timeInSeconds) {
 		this.timeInSeconds = timeInSeconds;
+		dinners = new Dinner[TOTAL_DINNER];
 	}
 	public void execute() throws Exception {
-		Fork[] forks = new Fork[5];
-		Thread[] threads = new Thread[5];
-		Thread[] stopThreads = new Thread[6];
-		
-		
+		Fork[] forks = new Fork[TOTAL_DINNER];
+		Thread[] threads = new Thread[TOTAL_DINNER];
+		Thread[] stopThreads = new Thread[TOTAL_DINNER + 1];
+	
 		for (int i = 0; i < forks.length; i++) {
 			forks[i] = new Fork();
 		}
@@ -53,7 +57,7 @@ public class DinningService {
 				System.out.println("Check deadLock thread ends");
 			}
 		});
-		stopThreads[5] = checkDeadLockThread;
+		stopThreads[TOTAL_DINNER] = checkDeadLockThread;
 		checkDeadLockThread.start();
 		StopThreadTask stopThreadTask = new StopThreadTask(stopThreads);
 
@@ -70,5 +74,13 @@ public class DinningService {
 			}
 		}
 		return blocked;	
+	}
+	public List<Long> getEatingTimes() {
+		List<Long> eastingTimes = new ArrayList<>();
+
+		for(Dinner dinner : dinners) {
+			eastingTimes.add(dinner.getEatingTime());
+		}
+		return eastingTimes;
 	}
 }

@@ -9,6 +9,14 @@ Deadlock happens when everyone has a fork and waits for another fork. No one is 
 Pros: The implementation avoids deadlock and starvation.
 Cons: There is no guarantee that everyone can spend equal amount of time eating.
 
+After running for 100 seconds
+Dinner 4 Total eating time 38338
+Dinner 1 Total eating time 31061
+Dinner 3 Total eating time 35330
+Dinner 2 Total eating time 33404
+Dinner 5 Total eating time 29181
+There is no starvation.
+
 
 Welcome to Concurrent Restaurant!
 

@@ -31,4 +31,8 @@ public abstract class Dinner implements Runnable {
 	protected void perform(String action) {
 		System.out.println(name + " " + action);
 	}
+
+	public long getEatingTime() {
+		return eatingTime;
+	}
 }
