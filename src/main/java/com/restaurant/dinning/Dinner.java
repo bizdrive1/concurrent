@@ -1,7 +1,8 @@
 package com.restaurant.dinning;
 
-public class Dinner implements Runnable {
+public abstract class Dinner implements Runnable {
 
+	protected long eatingTime;
 	protected String name;
 	protected Fork leftFork;
 	protected Fork rightFork;
@@ -11,31 +12,22 @@ public class Dinner implements Runnable {
 		this.leftFork = leftFork;
 		this.rightFork = rightFork;
 	}
-
+	
 	@Override
 	public void run() {
 		try {
 			while (true) {
-				synchronized (leftFork) {
-					perform("picked up left fork");
-					synchronized (rightFork) {
-						perform("picked up right fork");
-						int ms = (int) (Math.random() * 100);
-						perform("is eating ");
-						Thread.sleep(ms);
-						perform("ate for " + ms + "ms. Pausing to digest…");
-						perform("Put down right fork");
-					}
-					perform("Put down left fork.");
-				}
+				eatMeal();
 				// let other dinner get a chance to get the fork.
 				Thread.sleep(50);
 			}
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			System.out.println(name + " Thread ends. Total eating time " + eatingTime);
 		}
 	}
-
+	
+	protected abstract void eatMeal() throws InterruptedException;
+	
 	protected void perform(String action) {
 		System.out.println(name + " " + action);
 	}
