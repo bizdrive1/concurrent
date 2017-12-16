@@ -1,6 +1,6 @@
 Implementation:
 1. Each dinner is running on its own thread.
-2. Created dinner who picks left fork first (Dinner).
+2. Created dinner who picks left fork first (LeftDinner).
 3. Created dinner who picks right fork first (RightDinner to avoid deadlock.
 4. Added sleep at random interval to ensure every dinner has a chance to get the fork.
 
