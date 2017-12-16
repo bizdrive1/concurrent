@@ -1,6 +1,17 @@
+Implementation:
+1. Each dinner is running on its own thread.
+2. Created dinner who picks left fork first (Dinner).
+3. Created dinner who picks right fork first (RightDinner to avoid deadlock.
+4. Added sleep at random interval to ensure every dinner has a chance to get the fork.
+
+Deadlock happens when everyone has a fork and waits for another fork. No one is eating in that scenario. Starvation is when one or more dinners have less chance to get both forks to eat.
+
+Pros: The implementation avoids deadlock and starvation.
+Cons: There is no guarantee that everyone can spend equal amount of time eating.
+
+
 Welcome to Concurrent Restaurant!
 
- 
 
 This restaurant serves a special kind of dish that requires two forks to eat, no exceptions. A group of five friends go to Concurrent Restaurant for dinner and are seated at a circular table. When their food arrives, a fork is placed on the table between each friend and they are instructed to eat. Given that there are only five forks placed on the table and that each friend needs at least two forks to eat, an “eating strategy” must be developed such that the friends can eat concurrently. E.g. A simple strategy could be to have the friends take turns in a pre-defined order and eat for a fixed amount of time during their turn.
 
@@ -59,3 +70,5 @@ Sample Output:
 > Diner2 picks up left fork
 
 > Diner2 is eating
+
+
